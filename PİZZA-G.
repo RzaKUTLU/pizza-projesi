@@ -1,9 +1,9 @@
 #projeye başlangıç
-# Gerekli kitaplıkları içe aktarın
+# Gerekli kitaplıkları içe aktarma
 import csv
 import datetime
 
-# Menu.txt dosyasını oluşturun ve içine metni yazın
+# Menu.txt dosyasını oluşturma  ve içine metni yazma
 with open("Menu.txt", "w") as file:
     file.write("* Lütfen Bir Pizza Tabanı Seçiniz:\n")
     file.write("1: Klasik\n")
@@ -70,7 +70,7 @@ def main():
     sogna = Sogan()
     misir = Misir()
 
-    # Menüyü ekrana yazdırın
+    # Menüyü ekrana yazdırma
     print("Pizza Menüsü")
     print("1. Klasik Pizza - 15.99 TL")
     print("2. Margherita Pizza - 17.99 TL")
@@ -83,11 +83,11 @@ def main():
     print("15. Soğan - 1.5 TL")
     print("16. Mısır - 2.5 TL")
 
-    # Kullanıcının pizza ve sos seçimlerini yapmasını isteyin
+    # Kullanıcının pizza ve sos seçimlerini yapmasını istemek
     pizza_choice = int(input("Lütfen bir pizza seçin (1-3): "))
     sauce_choice = int(input("Lütfen bir sos seçin (11-16): "))
 
-    # Seçilen pizza ve sos objelerini alın
+    # Seçilen pizza ve sos objelerini alma
     if pizza_choice == 1:
         pizza = classic_pizza
     elif pizza_choice == 2:
@@ -108,7 +108,7 @@ def main():
     elif sauce_choice == 16:
         sauce = misir
 
-    # Toplam fiyatı hesaplayın
+    # Toplam fiyatı hesaplama
     total_cost = pizza.get_cost() + sauce.price
 
     # Kişisel bilgileri alın ve CSV dosyasına kaydedin
@@ -122,3 +122,36 @@ def main():
 
     # Siparişin onayını yazdırın
     print("Siparişiniz onaylandı. İyi günlerde kullanın!")
+    
+    
+    
+    
+    import csv
+import random
+from datetime import datetime, timedelta
+
+# Kullanıcı adları, kimlik numaraları ve kredi kartı bilgileri listeleri
+usernames = ["alice123", "bob456", "charlie789", "dave000"]
+ids = ["AA123456", "BB234567", "CC345678", "DD456789"]
+cc_numbers = ["1234567812345678", "2345678923456789", "3456789034567890", "4567890145678901"]
+
+# Pizza seçenekleri
+pizzas = ["Margarita", "Margarita", "Klasik pizza", "", "Türk pizza"]
+
+# Siparişleri rastgele oluşturma
+orders = []
+for i in range(50):
+    username = random.choice(usernames)
+    user_id = random.choice(ids)
+    cc_number = random.choice(cc_numbers)
+    pizza = random.choice(pizzas)
+    order_time = datetime.now() - timedelta(days=random.randint(1, 30))
+    cc_password = random.randint(100, 999)
+    order = [username, user_id, cc_number, pizza, order_time, cc_password]
+    orders.append(order)
+
+# Siparişleri CSV dosyasına yazma
+with open("Orders_Database.csv", "w", newline="") as f:
+    writer = csv.writer(f)
+    writer.writerow(["username", "user_id", "cc_number", "pizza", "order_time", "cc_password"])
+    writer.writerows(orders)

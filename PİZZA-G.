@@ -1,0 +1,124 @@
+#projeye başlangıç
+# Gerekli kitaplıkları içe aktarın
+import csv
+import datetime
+
+# Menu.txt dosyasını oluşturun ve içine metni yazın
+with open("Menu.txt", "w") as file:
+    file.write("* Lütfen Bir Pizza Tabanı Seçiniz:\n")
+    file.write("1: Klasik\n")
+    file.write("2: Margarita\n")
+    file.write("3: TürkPizza\n")
+    file.write("4: Sade Pizza\n")
+    file.write("* ve seçeceğiniz sos:\n")
+    file.write("11: Zeytin\n")
+    file.write("12: Mantarlar\n")
+    file.write("13: Keçi Peyniri\n")
+    file.write("14: Et\n")
+    file.write("15: Soğan\n")
+    file.write("16: Mısır\n")
+    file.write("* Teşekkür ederiz!")
+
+
+class Pizza:
+    def __init__(self, description, cost):
+        self.description = description
+        self.cost = cost
+
+    def get_description(self):
+        return self.description
+
+    def get_cost(self):
+        return self.cost
+
+
+
+class ClassicPizza(Pizza):
+    def __init__(self):
+        description = "Klasik pizza: domates sosu, mozzarella peyniri ve sucuk"
+        cost = 15.99
+        super().__init__(description, cost)
+
+
+class MargheritaPizza(Pizza):
+    def __init__(self):
+        description = "Margarita pizza: domates sosu, mozzarella peyniri ve taze fesleğen yaprakları"
+        cost = 17.99
+        super().__init__(description, cost)
+
+
+class TurkishPizza(Pizza):
+    def __init__(self):
+        description = "Türk pizza: domates sosu, kaşar peyniri, sucuk, sosis, yeşil biber ve domates"
+        cost = 19.99
+        super().__init__(description, cost)
+
+
+import csv
+
+def main():
+    # Pizza objelerini oluşturun
+    classic_pizza = ClassicPizza()
+    margherita_pizza = MargheritaPizza()
+    turkish_pizza = TurkishPizza()
+
+    # Sos objelerini oluşturun
+    zeytin = Zeytin()
+    mantar = Mantar()
+    keci_peyniri = KeciPeyniri()
+    et = Et()
+    sogna = Sogan()
+    misir = Misir()
+
+    # Menüyü ekrana yazdırın
+    print("Pizza Menüsü")
+    print("1. Klasik Pizza - 15.99 TL")
+    print("2. Margherita Pizza - 17.99 TL")
+    print("3. Türk Pizza - 19.99 TL")
+    print("Soslar:")
+    print("11. Zeytin - 2.0 TL")
+    print("12. Mantar - 3.0 TL")
+    print("13. Keçi Peyniri - 4.0 TL")
+    print("14. Et - 5.0 TL")
+    print("15. Soğan - 1.5 TL")
+    print("16. Mısır - 2.5 TL")
+
+    # Kullanıcının pizza ve sos seçimlerini yapmasını isteyin
+    pizza_choice = int(input("Lütfen bir pizza seçin (1-3): "))
+    sauce_choice = int(input("Lütfen bir sos seçin (11-16): "))
+
+    # Seçilen pizza ve sos objelerini alın
+    if pizza_choice == 1:
+        pizza = classic_pizza
+    elif pizza_choice == 2:
+        pizza = margherita_pizza
+    elif pizza_choice == 3:
+        pizza = turkish_pizza
+
+    if sauce_choice == 11:
+        sauce = zeytin
+    elif sauce_choice == 12:
+        sauce = mantar
+    elif sauce_choice == 13:
+        sauce = keci_peyniri
+    elif sauce_choice == 14:
+        sauce = et
+    elif sauce_choice == 15:
+        sauce = sogna
+    elif sauce_choice == 16:
+        sauce = misir
+
+    # Toplam fiyatı hesaplayın
+    total_cost = pizza.get_cost() + sauce.price
+
+    # Kişisel bilgileri alın ve CSV dosyasına kaydedin
+    name = input("İsim: ")
+    tc = input("TC Kimlik Numarası: ")
+    cc_number = input("Kredi Kartı Numarası: ")
+    cc_cvv = input("Kredi Kartı Güvenlik Kodu: ")
+    with open("orders.csv", "a", newline="") as file:
+        writer = csv.writer(file)
+        writer.writerow([name, tc, cc_number, cc_cvv, total_cost])
+
+    # Siparişin onayını yazdırın
+    print("Siparişiniz onaylandı. İyi günlerde kullanın!")
